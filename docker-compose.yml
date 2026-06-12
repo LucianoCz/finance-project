@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongodb:27017/finance
+      - JWT_SECRET=supersecretjwtkey
+    depends_on:
+      - mongodb
+    networks:
+      - finance-network
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - finance-network
+
+networks:
+  finance-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

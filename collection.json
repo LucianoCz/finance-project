@@ -1,0 +1,120 @@
+{
+  "info": {
+    "name": "Personal Finance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@test.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@test.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Create Transaction",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Salary\",\n  \"type\": \"income\",\n  \"amount\": 5000,\n  \"date\": \"2023-10-01T00:00:00Z\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/transactions",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "transactions"]
+            }
+          }
+        },
+        {
+          "name": "List Transactions",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/api/transactions?page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "transactions"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Balance",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/api/transactions/balance/USER_ID_HERE",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "transactions", "balance", "USER_ID_HERE"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
